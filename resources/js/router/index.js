@@ -22,6 +22,7 @@ import nestedRoutes from './modules/nested';
 import errorRoutes from './modules/error';
 import excelRoutes from './modules/excel';
 import permissionRoutes from './modules/permission';
+import postsRoutes from './modules/posts';
 
 /**
  * Sub-menu only appear when children.length>=1
@@ -118,6 +119,7 @@ export const constantRoutes = [
       },
     ],
   },
+  postsRoutes,
   {
     path: '/guide',
     component: Layout,
@@ -164,7 +166,11 @@ export const asyncRoutes = [
         path: 'index',
         component: () => import('@/views/clipboard/index'),
         name: 'ClipboardDemo',
-        meta: { title: 'clipboardDemo', icon: 'clipboard', roles: ['admin', 'manager', 'editor', 'user'] },
+        meta: {
+          title: 'clipboardDemo',
+          icon: 'clipboard',
+          roles: ['admin', 'manager', 'editor', 'user'],
+        },
       },
     ],
   },
@@ -230,12 +236,13 @@ export const asyncRoutes = [
   { path: '*', redirect: '/404', hidden: true },
 ];
 
-const createRouter = () => new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  base: process.env.MIX_LARAVUE_PATH,
-  routes: constantRoutes,
-});
+const createRouter = () =>
+  new Router({
+    // mode: 'history', // require service support
+    scrollBehavior: () => ({ y: 0 }),
+    base: process.env.MIX_LARAVUE_PATH,
+    routes: constantRoutes,
+  });
 
 const router = createRouter();
 
